@@ -23,7 +23,7 @@ async function handle(request: NextRequest, context: { params: { path: string[] 
   
   // Em produção (Vercel), executar serverless function
   try {
-    const serverlessHandler = await import('../../api/backend.js');
+    const serverlessHandler = await import('@/api/backend.js');
     
     // Converter NextRequest para formato Express/Node.js
     const url = new URL(request.url);
