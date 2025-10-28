@@ -1,7 +1,7 @@
 // Conector SIMPLES que pede ao usuário para conectar manualmente
 // Em seguida, detecta a sessão automaticamente
 
-import { WalletType, WalletInfo } from './types';
+import { WalletType, WalletInfo } from './walletConnector';
 
 class SimpleWalletConnector {
   async connectCrossmark(): Promise<WalletInfo> {
