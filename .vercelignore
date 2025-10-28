@@ -1,0 +1,8 @@
+backend/
+contracts/
+.deploy/
+*.secret
+*.key
+*.log
+node_modules/
+

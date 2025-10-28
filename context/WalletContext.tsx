@@ -77,7 +77,11 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
         
         // Conectar XRPL e buscar saldo
         try {
-          const xrplClient = new Client('wss://xrplcluster.com');
+          const network = process.env.NEXT_PUBLIC_XRPL_NETWORK || 'testnet';
+          const endpoint = network === 'mainnet' 
+            ? 'wss://xrplcluster.com'
+            : 'wss://s.altnet.rippletest.net:51233';
+          const xrplClient = new Client(endpoint);
           await xrplClient.connect();
           setClient(xrplClient);
           
@@ -199,7 +203,11 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       // Conectar XRPL e buscar saldo
       try {
         console.log('🌐 Conectando ao XRPL...');
-        const xrplClient = new Client('wss://xrplcluster.com');
+        const network = process.env.NEXT_PUBLIC_XRPL_NETWORK || 'testnet';
+        const endpoint = network === 'mainnet' 
+          ? 'wss://xrplcluster.com'
+          : 'wss://s.altnet.rippletest.net:51233';
+        const xrplClient = new Client(endpoint);
         await xrplClient.connect();
         setClient(xrplClient);
         

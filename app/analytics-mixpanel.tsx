@@ -21,7 +21,7 @@ export default function MixpanelAnalytics() {
         });
       }
     }
-  }, []);
+  }, [MIXPANEL_TOKEN]);
 
   if (!MIXPANEL_TOKEN) {
     return null;
@@ -29,6 +29,7 @@ export default function MixpanelAnalytics() {
 
   return (
     <Script
+      id="mixpanel-analytics"
       strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: `

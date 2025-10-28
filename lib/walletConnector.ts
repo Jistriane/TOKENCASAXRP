@@ -16,6 +16,7 @@ export interface WalletInfo {
   address: string;
   user?: any;
   network?: string;
+  publicKey?: string;
 }
 
 class WalletConnector {

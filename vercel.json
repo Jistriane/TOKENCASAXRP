@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev:frontend",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["gru1"],
+  "env": {
+    "NEXT_PUBLIC_XRPL_NETWORK": "testnet"
+  }
+}
