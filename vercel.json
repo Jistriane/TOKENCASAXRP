@@ -6,5 +6,11 @@
   "regions": ["gru1"],
   "env": {
     "NEXT_PUBLIC_XRPL_NETWORK": "testnet"
+  },
+  "functions": {
+    "api/backend.js": {
+      "memory": 1024,
+      "maxDuration": 30
+    }
   }
 }
