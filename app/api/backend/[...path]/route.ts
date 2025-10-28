@@ -24,12 +24,13 @@ async function handleRequest(request: NextRequest, pathSegments: string[], metho
     const backendPath = `/api/${pathSegments.join('/')}`;
     const backendUrl = `${BACKEND_URL}${backendPath}${searchParams ? `?${searchParams}` : ''}`;
     
+    console.log(`🔄 Proxying ${method} ${backendUrl}`);
+    
     // Preparar headers
-    const headers = new Headers();
+    const headers: Record<string, string> = {};
     request.headers.forEach((value, key) => {
-      headers.set(key, value);
+      headers[key] = value;
     });
-    headers.set('Content-Type', 'application/json');
     
     // Preparar body (se aplicável)
     let body = undefined;
@@ -53,9 +54,14 @@ async function handleRequest(request: NextRequest, pathSegments: string[], metho
     
     const data = await response.text();
     
-    return NextResponse.json(JSON.parse(data), { status: response.status });
+    // Tentar parsear como JSON, se falhar retornar texto
+    try {
+      return NextResponse.json(JSON.parse(data), { status: response.status });
+    } catch {
+      return new NextResponse(data, { status: response.status });
+    }
   } catch (error: any) {
-    console.error('Error proxying request:', error);
+    console.error('❌ Error proxying request:', error);
     return NextResponse.json(
       { error: 'Backend request failed', message: error.message },
       { status: 500 }
