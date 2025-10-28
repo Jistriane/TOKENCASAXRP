@@ -2,7 +2,8 @@
  * API Service - Integração com Backend NestJS
  */
 
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+// Usa API routes do Next.js para proxy para o backend
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '/api/backend';
 
 export interface Property {
   id: string;
