@@ -1,0 +1,104 @@
+import { NextResponse } from 'next/server';
+
+interface Property {
+  id: string;
+  title: string;
+  address: string;
+  price: number;
+  totalTokens: number;
+  pricePerToken: number;
+  yieldAnnual: number;
+  type: 'residencial' | 'comercial';
+  area: number;
+  image: string;
+  description: string;
+}
+
+// Mock data - em produção viria do PostgreSQL
+const mockProperties: Property[] = [
+  {
+    id: '1',
+    title: 'Apartamento - Copacabana',
+    address: 'Av. Atlântica, 1000 - Copacabana, RJ',
+    price: 800000,
+    totalTokens: 1000000,
+    pricePerToken: 0.8,
+    yieldAnnual: 9,
+    type: 'residencial',
+    area: 85,
+    image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800',
+    description: 'Apartamento moderno com vista para o mar.',
+  },
+  {
+    id: '2',
+    title: 'Loja Comercial - Vila Madalena',
+    address: 'Rua Harmonia, 500 - Vila Madalena, SP',
+    price: 1200000,
+    totalTokens: 1500000,
+    pricePerToken: 0.8,
+    yieldAnnual: 8.5,
+    type: 'comercial',
+    area: 120,
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800',
+    description: 'Loja bem localizada em área de alto movimento.',
+  },
+  {
+    id: '3',
+    title: 'Casa - Praia do Futuro',
+    address: 'Av. Beira Mar, 2500 - Fortaleza, CE',
+    price: 600000,
+    totalTokens: 800000,
+    pricePerToken: 0.75,
+    yieldAnnual: 10,
+    type: 'residencial',
+    area: 150,
+    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800',
+    description: 'Casa de praia com piscina e área gourmet.',
+  },
+  {
+    id: '4',
+    title: 'Galpão Industrial - São Bernardo',
+    address: 'Rua Industrial, 1500 - São Bernardo, SP',
+    price: 2500000,
+    totalTokens: 3000000,
+    pricePerToken: 0.83,
+    yieldAnnual: 7.5,
+    type: 'comercial',
+    area: 800,
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa926e5c68?w=800',
+    description: 'Galpão estruturado em área industrial consolidada.',
+  },
+];
+
+export async function GET() {
+  return NextResponse.json({ properties: mockProperties });
+}
+
+export async function POST(request: Request) {
+  try {
+    const property = await request.json();
+    
+    // Em produção, salvaria no PostgreSQL
+    console.log('Tokenizando imóvel:', property);
+    
+    // Simulação de criação de MPT
+    const mptToken = {
+      id: `MPT_${Date.now()}`,
+      propertyId: property.id,
+      address: `mpt_${Date.now()}`,
+      totalSupply: property.totalTokens,
+    };
+    
+    return NextResponse.json({ 
+      success: true,
+      mpt: mptToken,
+      message: 'Imóvel tokenizado com sucesso!'
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Erro ao tokenizar imóvel' },
+      { status: 500 }
+    );
+  }
+}
+

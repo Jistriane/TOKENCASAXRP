@@ -1,0 +1,47 @@
+{
+  "network": "testnet",
+  "timestamp": "2025-10-27T18:54:39.294Z",
+  "summary": {
+    "successful": 2,
+    "failed": 2,
+    "total": 4
+  },
+  "results": [
+    {
+      "success": false,
+      "contract": "CredentialsContract",
+      "network": "testnet",
+      "timestamp": "2025-10-27T18:54:30.416Z",
+      "error": "Transaction failed, temMALFORMED: Malformed transaction."
+    },
+    {
+      "success": true,
+      "contract": "MPTContract",
+      "network": "testnet",
+      "timestamp": "2025-10-27T18:54:31.683Z",
+      "transactionHash": "DF97B75D485DD3C55EC923F70060DA780F942D1B16F9383C6F6C83A8E8E57A6C",
+      "addresses": {
+        "owner": "rpyDCbETL2pYhhz5aJoWVo6ovk1GyFgFpb",
+        "propertyId": "TEST-001",
+        "supply": 1000000
+      }
+    },
+    {
+      "success": false,
+      "contract": "EscrowContract",
+      "network": "testnet",
+      "timestamp": "2025-10-27T18:54:36.972Z",
+      "error": "Transaction failed, temMALFORMED: Malformed transaction."
+    },
+    {
+      "success": true,
+      "contract": "DEXContract",
+      "network": "testnet",
+      "timestamp": "2025-10-27T18:54:38.228Z",
+      "addresses": {
+        "network": "testnet",
+        "endpoint": "wss://s.altnet.rippletest.net:51233"
+      }
+    }
+  ]
+}
