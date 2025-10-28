@@ -1,8 +1,34 @@
-backend/
-contracts/
-.deploy/
-*.secret
-*.key
-*.log
-node_modules/
+# Desenvolvimento
+.vscode/
+.idea/
 
+# Build
+node_modules/
+backend/dist/
+backend/node_modules/
+
+# Contratos
+contracts/
+
+# Documentação
+*.md
+!README.md
+
+# Logs
+*.log
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Testes
+*.test.ts
+*.spec.ts
+__tests__/
+coverage/
+
+# Misc
+.DS_Store
+.git/
+.gitignore

@@ -1,22 +1,56 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Configuração da URL do backend
+// Em produção/Vercel, usar backend serverless diretamente
+// Em desenvolvimento, fazer proxy para o backend local
+const isProd = process.env.NODE_ENV === 'production';
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
 
-export async function GET(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleRequest(request, params.path, 'GET');
-}
+export const GET = handle;
+export const POST = handle;
+export const PUT = handle;
+export const DELETE = handle;
+export const PATCH = handle;
 
-export async function POST(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleRequest(request, params.path, 'POST');
-}
-
-export async function PUT(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleRequest(request, params.path, 'PUT');
-}
-
-export async function DELETE(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleRequest(request, params.path, 'DELETE');
+async function handle(request: NextRequest, context: { params: { path: string[] } }) {
+  const { params } = context;
+  const method = request.method;
+  
+  // Em produção, redirecionar para handler serverless
+  if (isProd) {
+    // Importar e executar o handler serverless do NestJS
+    try {
+      const { handler } = await import('@/../api/backend/serverless');
+      
+      // Converter request do Next.js para formato AWS Lambda
+      const event = {
+        httpMethod: method,
+        path: `/api/${params.path.join('/')}`,
+        pathParameters: params.path,
+        queryStringParameters: Object.fromEntries(request.nextUrl.searchParams),
+        headers: Object.fromEntries(request.headers.entries()),
+        body: method !== 'GET' && method !== 'HEAD' ? await request.text() : null,
+        isBase64Encoded: false,
+      };
+      
+      const result = await handler(event, {
+        callbackWaitsForEmptyEventLoop: false,
+      });
+      
+      return new NextResponse(result.body, {
+        status: result.statusCode,
+        headers: result.headers as HeadersInit,
+      });
+    } catch (error: any) {
+      console.error('Serverless handler error:', error);
+      return NextResponse.json(
+        { error: 'Backend error', message: error.message },
+        { status: 500 }
+      );
+    }
+  }
+  
+  // Em desenvolvimento, fazer proxy para backend local
+  return handleRequest(request, params.path, method);
 }
 
 async function handleRequest(request: NextRequest, pathSegments: string[], method: string) {

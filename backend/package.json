@@ -7,6 +7,7 @@
     "start": "node dist/main.js",
     "dev": "nest start --watch",
     "build": "nest build",
+    "build:vercel": "nest build && cp -r dist ../api/backend",
     "lint": "eslint src --fix",
     "test": "jest",
     "migration:generate": "typeorm migration:generate",
@@ -27,6 +28,7 @@
     "pinata": "^1.1.5",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
+    "serverless-http": "^3.2.0",
     "typeorm": "^0.3.17",
     "web-push": "^3.6.7",
     "xrpl": "^4.0.0"
