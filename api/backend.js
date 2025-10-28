@@ -2,12 +2,12 @@
 const serverless = require('serverless-http');
 const path = require('path');
 
-// Determinar se estamos em produção ou desenvolvimento
-const isProd = process.env.NODE_ENV === 'production';
-
 async function createApp() {
   const { NestFactory } = require('@nestjs/core');
-  const { AppModule } = require('./src/app.module');
+  
+  // Importar do backend compilado
+  const backendPath = path.join(__dirname, '../backend/dist');
+  const { AppModule } = require(path.join(backendPath, 'app.module'));
   
   const app = await NestFactory.create(AppModule, {
     logger: false,
