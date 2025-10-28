@@ -1,7 +1,11 @@
 # 🏠 TokenCasa - Fracionamento de Imóveis para Micro-Investidores
 
-> **Invista em imóveis a partir de R$ 100**  
-> Da poupança para o patrimônio imobiliário em 5 minutos
+<div align="center">
+  <img src="Logo.png" alt="TokenCasa Logo" width="200"/>
+  
+  > **Invista em imóveis a partir de R$ 100**  
+  > Da poupança para o patrimônio imobiliário em 5 minutos
+</div>
 
 ## ✅ PROJETO 100% COMPLETO - PRONTO PARA PRODUÇÃO
 
