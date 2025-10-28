@@ -63,6 +63,41 @@
 
 ---
 
+## 🌐 Deploy do Frontend
+
+**Status**: ✅ Frontend Deployado na Vercel  
+**Data do Deploy**: 27 de Outubro de 2025  
+**Plataforma**: Vercel  
+**Network**: XRPL Testnet  
+
+### URLs do Frontend Deployado:
+
+- 🚀 **Produção**: https://tokencasaxrp.vercel.app
+- 🚀 **Preview (main)**: https://tokencasaxrp-git-main-jistrianedroid-3423s-projects.vercel.app
+- 🚀 **Deploy Preview**: https://tokencasaxrp-bdxrgs7cr-jistrianedroid-3423s-projects.vercel.app
+
+### Configurações de Deploy:
+
+- **Framework**: Next.js 14 (App Router)
+- **Região**: gru1 (São Paulo, Brasil)
+- **Build**: Otimizado para produção
+- **Network**: XRPL Testnet
+- **Endpoint**: `wss://s.altnet.rippletest.net:51233`
+
+### Variáveis de Ambiente Configuradas:
+
+- `NEXT_PUBLIC_XRPL_NETWORK` = `testnet`
+- `NODE_ENV` = `production`
+
+### Deploy Automático:
+
+✅ Deploy automático configurado via GitHub  
+✅ Push para `main` triggera deploy automático  
+✅ Build verificando compilação sem erros  
+✅ 13 páginas estáticas geradas com sucesso  
+
+---
+
 ## 📊 O QUE FOI IMPLEMENTADO
 
 ### Frontend (100%)
