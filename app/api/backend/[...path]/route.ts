@@ -19,7 +19,10 @@ async function handle(request: NextRequest, context: { params: { path: string[] 
   if (isProd) {
     // Importar e executar o handler serverless do NestJS
     try {
-      const { handler } = await import('@/../api/backend/serverless');
+      // Importar dinamicamente com caminho correto
+      const path = require('path');
+      const serverlessPath = path.join(process.cwd(), 'api', 'backend', 'serverless.js');
+      const { handler } = await import(serverlessPath);
       
       // Converter request do Next.js para formato AWS Lambda
       const event = {

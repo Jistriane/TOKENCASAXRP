@@ -11,7 +11,7 @@ npm install
 
 # Build do NestJS
 echo "🔨 Building NestJS..."
-npm run build
+npm run build || npx nest build
 
 # Voltar para o root e criar diretório de destino
 cd ..
