@@ -6,7 +6,7 @@
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "dev:frontend": "next dev",
     "dev:backend": "cd backend && npm run dev",
-    "build": "npm run build:backend && next build",
+    "build": "next build",
     "build:backend": "./build-backend.sh",
     "start": "next start",
     "lint": "next lint",
