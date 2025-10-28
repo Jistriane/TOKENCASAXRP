@@ -2,8 +2,8 @@
  * API Service - Integração com Backend NestJS
  */
 
-// Usa API routes do Next.js para proxy para o backend
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '/api/backend';
+// Usa API routes do Next.js diretamente
+const API_URL = '/api';
 
 export interface Property {
   id: string;
@@ -26,9 +26,9 @@ class ApiService {
    */
   async getProperties(): Promise<Property[]> {
     try {
-      const response = await fetch(`${API_URL}/api/properties`);
+      const response = await fetch(`${API_URL}/properties`);
       const data = await response.json();
-      return data;
+      return data.properties || [];
     } catch (error) {
       console.error('Erro ao buscar imóveis:', error);
       return [];
@@ -40,7 +40,7 @@ class ApiService {
    */
   async getProperty(id: string): Promise<Property | null> {
     try {
-      const response = await fetch(`${API_URL}/api/properties/${id}`);
+      const response = await fetch(`${API_URL}/properties/${id}`);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -54,8 +54,11 @@ class ApiService {
    */
   async tokenizeProperty(id: string): Promise<any> {
     try {
-      const response = await fetch(`${API_URL}/api/properties/${id}/tokenize`, {
+      const response = await fetch(`${API_URL}/properties`, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
       const data = await response.json();
       return data;
@@ -70,7 +73,7 @@ class ApiService {
    */
   async createProperty(property: any): Promise<any> {
     try {
-      const response = await fetch(`${API_URL}/api/properties`, {
+      const response = await fetch(`${API_URL}/properties`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -89,20 +92,13 @@ class ApiService {
    * Verifica KYC
    */
   async verifyKYC(kycData: any): Promise<any> {
-    try {
-      const response = await fetch(`${API_URL}/api/users/kyc`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(kycData),
-      });
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Erro ao verificar KYC:', error);
-      throw error;
-    }
+    // Mock implementation - KYC será implementado via XRPL Credentials
+    return {
+      success: true,
+      verified: true,
+      credentialHash: 'mock_credential_hash',
+      message: 'KYC mock verificado'
+    };
   }
 
   /**
@@ -110,7 +106,7 @@ class ApiService {
    */
   async distributeRent(distributionData: any): Promise<any> {
     try {
-      const response = await fetch(`${API_URL}/api/escrow/distribute`, {
+      const response = await fetch(`${API_URL}/escrow`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -129,14 +125,18 @@ class ApiService {
    * Busca histórico de transações
    */
   async getTransactions(): Promise<any[]> {
-    try {
-      const response = await fetch(`${API_URL}/api/transactions`);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Erro ao buscar transações:', error);
-      return [];
-    }
+    // Mock implementation - transações virão do XRPL
+    return [
+      {
+        id: 'tx_1',
+        type: 'buy',
+        propertyId: '1',
+        tokens: 625,
+        value: 500,
+        timestamp: new Date(),
+        txHash: 'mock_tx_hash',
+      }
+    ];
   }
 }
 
