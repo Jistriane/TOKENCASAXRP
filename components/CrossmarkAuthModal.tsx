@@ -19,7 +19,7 @@ export default function CrossmarkAuthModal({
         <h3 className="text-lg font-semibold mb-2">Autorizar Crossmark</h3>
         <p className="mb-4 text-sm">
           Para conectar, abra a extensão Crossmark e autorize o acesso para localhost.
-          Você pode clicar em "Abrir Crossmark" para forçar a abertura da extensão.
+          Você pode clicar em &ldquo;Abrir Crossmark&rdquo; para forçar a abertura da extensão.
         </p>
 
         <div className="flex justify-end gap-2">

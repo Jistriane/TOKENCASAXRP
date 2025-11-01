@@ -88,5 +88,6 @@ class SimpleWalletConnector {
   }
 }
 
-export default new SimpleWalletConnector();
+const simpleWalletConnector = new SimpleWalletConnector();
+export default simpleWalletConnector;
 

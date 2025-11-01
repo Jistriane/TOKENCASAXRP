@@ -1,5 +1,7 @@
 # 🏠 TokenCasa - Fracionamento de Imóveis para Micro-Investidores
 
+🇬🇧 English: [README_EN.md](./README_EN.md)
+
 <div align="center">
   <img src="Logo.png" alt="TokenCasa Logo" width="200"/>
   
@@ -13,10 +15,10 @@
 **Data**: 1 de Novembro de 2025  
 **Powered by XRPL**
 
-### Documentação em Inglês
+### Documentação
 
-- Resumo em inglês disponível em `DOCUMENTACAO_COMPLETA.md` → seção **English version**.
-- Link direto (no repositório): `./DOCUMENTACAO_COMPLETA.md#english-version`
+- Documentação completa (Português): `DOCUMENTACAO_PT.md`
+- Documentation (English): `DOCUMENTATION_EN.md`
 
 ### 🚀 Deploy dos Contratos XRPL
 
@@ -444,7 +446,8 @@ Acesse os contratos diretamente:
 
 ### Documentação Completa
 
-- 📖 **`DOCUMENTACAO_COMPLETA.md`** ⭐ - **Documentação completa e detalhada do projeto**
+- 📖 **`DOCUMENTACAO_PT.md`** ⭐ - Documentação completa em Português
+- 📖 **`DOCUMENTATION_EN.md`** ⭐ - Complete documentation in English
   - Visão geral e missão
   - O problema e a solução
   - Como funciona (fluxo completo)
@@ -458,7 +461,7 @@ Acesse os contratos diretamente:
 ### Guias e Referências
 
 - `README.md` - Este arquivo (guia principal)
-- `DOCUMENTACAO_COMPLETA.md` ⭐ - Documentação completa e detalhada
+- `DOCUMENTACAO_PT.md` ⭐ - Documentação completa e detalhada (Português)
 - `EXECUTAR_TUDO.md` - Como executar tudo
 - `TokenCasaXRP Arquitetura.md` - Arquitetura original completa
 - `contracts/DEPLOY_GUIDE.md` - Guia completo de deploy dos contratos

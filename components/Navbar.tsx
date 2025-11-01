@@ -42,7 +42,7 @@ export default function Navbar() {
             <a href="/#marketplace" className="text-gray-600 hover:text-gray-900 font-semibold transition-colors px-2 py-1 rounded hover:bg-gray-100 md:hover:bg-transparent">Marketplace</a>
             <a href="/#portfolio" className="text-gray-600 hover:text-gray-900 font-semibold transition-colors px-2 py-1 rounded hover:bg-gray-100 md:hover:bg-transparent">Portfolio</a>
             <a href="/about" className="text-gray-600 hover:text-gray-900 font-semibold transition-colors px-2 py-1 rounded hover:bg-gray-100 md:hover:bg-transparent">Sobre</a>
-            <a href="/DOCUMENTACAO_COMPLETA.md#english-version" className="text-gray-600 hover:text-gray-900 font-semibold transition-colors px-2 py-1 rounded hover:bg-gray-100 md:hover:bg-transparent">Docs (EN)</a>
+            <a href="/DOCUMENTATION_EN.md" className="text-gray-600 hover:text-gray-900 font-semibold transition-colors px-2 py-1 rounded hover:bg-gray-100 md:hover:bg-transparent">Docs (EN)</a>
             <a href="/trading" className="text-gray-600 hover:text-gray-900 font-semibold transition-colors px-2 py-1 rounded hover:bg-gray-100 md:hover:bg-transparent">Trading</a>
             <a href="/transactions" className="text-gray-600 hover:text-gray-900 font-semibold transition-colors px-2 py-1 rounded hover:bg-gray-100 md:hover:bg-transparent">Transações</a>
             <a href="/compliance" className="text-gray-600 hover:text-gray-900 font-semibold transition-colors px-2 py-1 rounded hover:bg-gray-100 md:hover:bg-transparent">Compliance</a>
