@@ -852,3 +852,67 @@ O **TokenCasa** representa uma revolução no acesso ao mercado imobiliário bra
 **Última Atualização**: 1 de Novembro de 2025  
 **Powered by XRPL** ⚡
 
+---
+
+## English version
+
+# 📖 Complete Documentation - TokenCasa
+
+> **Real Estate Tokenization for Micro-Investors**  
+> Invest in real estate starting at R$100 on the XRPL blockchain
+
+**Version**: 1.0  
+**Date**: November 1, 2025  
+**Status**: ✅ 100% Complete - Production Ready  
+**Blockchain**: XRPL Testnet (Complete deployment)
+
+---
+
+## Overview
+
+TokenCasa is a full-stack platform for tokenizing real estate, allowing anyone to invest in properties starting at R$100. It leverages the XRPL for fast, low-cost transactions, automatic rent distribution and on-chain compliance.
+
+## Deploy status
+
+**Deploy Date**: November 1, 2025, 04:38 UTC  
+**Network**: XRPL Testnet  
+**Endpoint**: `wss://s.altnet.rippletest.net:51233`  
+
+Deploy wallet:
+- **Address**: `ratmrQEFnEiZqZ1RVvR7Yg28HjAqR5sf1E`
+- **Balance**: 100.00 XRP
+
+Deployed contracts (4/4 - 100%):
+
+1. CredentialsContract — connected (2025-11-01T04:38:43.835Z)
+2. MPTContract — connected (2025-11-01T04:38:44.923Z) — owner: `ratmrQEFnEiZqZ1RVvR7Yg28HjAqR5sf1E`
+3. EscrowContract — connected (2025-11-01T04:38:46.008Z)
+4. DEXContract — connected (2025-11-01T04:38:47.094Z)
+
+Reports:
+- JSON: `contracts/deploy-reports/deploy-testnet-2025-11-01T04-38-47-396Z.json`
+- Log: `contracts/deploy-reports/deploy-testnet-2025-11-01T04-38-47-396Z.log`
+
+## Quick start (English)
+
+Install dependencies and run development:
+
+```bash
+npm install
+npm run dev
+```
+
+This starts:
+- Frontend → http://localhost:3000
+- Backend → http://localhost:3001
+
+## Useful links
+
+- XRPL Testnet Explorer: https://testnet.xrpl.org
+- Wallet Explorer: https://testnet.xrpl.org/accounts/ratmrQEFnEiZqZ1RVvR7Yg28HjAqR5sf1E
+- Faucet: https://xrpl.org/xrp-testnet-faucet.html
+
+---
+
+If you want, I can also create a separate `DOCUMENTATION_COMPLETE_EN.md` file with a full, line-by-line translation of the Portuguese document. Tell me which option you prefer.
+
