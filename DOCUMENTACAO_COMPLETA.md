@@ -4,7 +4,7 @@
 > Investir em imóveis a partir de R$ 100 na blockchain XRPL
 
 **Versão**: 1.0  
-**Data**: 27 de Outubro de 2025  
+**Data**: 1 de Novembro de 2025  
 **Status**: ✅ 100% Completo - Pronto para Produção  
 **Blockchain**: XRPL Testnet (Deploy Completo)
 
@@ -362,9 +362,9 @@ interface Holding {
 - **Email**: SendGrid
 - **Notifications**: Push Notifications
 
-#### Blockchain
+-#### Blockchain
 - **Network**: XRPL Testnet
-- **Wallet**: rpyDCbETL2pYhhz5aJoWVo6ovk1GyFgFpb
+- **Wallet**: ratmrQEFnEiZqZ1RVvR7Yg28HjAqR5sf1E
 - **Features**: MPT, DEX, AMM, CAM, Escrow, Credentials, DID
 - **Storage**: IPFS (Pinata)
 - **Oracle**: Chainlink
@@ -423,10 +423,10 @@ interface EscrowFlow {
 
 ### Status do Deploy
 
-**Data do Deploy**: 27 de Outubro de 2025, 20:40 UTC  
+**Data do Deploy**: 1 de Novembro de 2025, 04:38 UTC  
 **Network**: XRPL Testnet  
 **Endpoint**: `wss://s.altnet.rippletest.net:51233`  
-**Wallet**: `rpyDCbETL2pYhhz5aJoWVo6ovk1GyFgFpb`  
+**Wallet**: `ratmrQEFnEiZqZ1RVvR7Yg28HjAqR5sf1E`  
 **Balance**: 100.00 XRP
 
 ### Contratos Deployados
@@ -434,7 +434,7 @@ interface EscrowFlow {
 #### 1. CredentialsContract ✅
 - **Status**: Conectado com sucesso
 - **Funcionalidade**: Sistema KYC/AML completo
-- **Timestamp**: 2025-10-27T23:40:04.256Z
+- **Timestamp**: 2025-11-01T04:38:43.835Z
 - **Features**:
   - Emissão de credentials de investidor
   - Verificação de KYC/AML
@@ -445,7 +445,7 @@ interface EscrowFlow {
 - **Status**: Conectado com sucesso
 - **Owner**: rpyDCbETL2pYhhz5aJoWVo6ovk1GyFgFpb
 - **Funcionalidade**: Sistema de tokens de imóveis
-- **Timestamp**: 2025-10-27T23:40:05.315Z
+- **Timestamp**: 2025-11-01T04:38:44.923Z
 - **Features**:
   - Tokenização de imóveis
   - Metadata on-chain
@@ -455,7 +455,7 @@ interface EscrowFlow {
 #### 3. EscrowContract ✅
 - **Status**: Conectado com sucesso
 - **Funcionalidade**: Distribuição automática de aluguel
-- **Timestamp**: 2025-10-27T23:40:06.376Z
+- **Timestamp**: 2025-11-01T04:38:46.008Z
 - **Features**:
   - Time-locked escrow
   - Distribuição proporcional
@@ -466,7 +466,7 @@ interface EscrowFlow {
 - **Status**: Conectado com sucesso
 - **Endpoint**: wss://s.altnet.rippletest.net:51233
 - **Funcionalidade**: Trading descentralizado
-- **Timestamp**: 2025-10-27T23:40:07.434Z
+- **Timestamp**: 2025-11-01T04:38:47.094Z
 - **Features**:
   - Order book nativo
   - AMM integration
@@ -485,8 +485,8 @@ interface EscrowFlow {
 
 ### Relatórios
 
-- **JSON**: `contracts/deploy-reports/deploy-testnet-2025-10-27T23-40-08-502Z.json`
-- **Log**: `contracts/deploy-reports/deploy-testnet-2025-10-27T23-40-08-502Z.log`
+- **JSON**: `contracts/deploy-reports/deploy-testnet-2025-11-01T04-38-47-396Z.json`
+- **Log**: `contracts/deploy-reports/deploy-testnet-2025-11-01T04-38-47-396Z.log`
 
 ---
 
@@ -820,7 +820,7 @@ npm run generate:wallet
 ### Links Úteis
 
 - **XRPL Testnet Explorer**: https://testnet.xrpl.org
-- **Wallet Explorer**: https://testnet.xrpl.org/accounts/rpyDCbETL2pYhhz5aJoWVo6ovk1GyFgFpb
+- **Wallet Explorer**: https://testnet.xrpl.org/accounts/ratmrQEFnEiZqZ1RVvR7Yg28HjAqR5sf1E
 - **Faucet**: https://xrpl.org/xrp-testnet-faucet.html
 
 ---
@@ -849,6 +849,6 @@ O **TokenCasa** representa uma revolução no acesso ao mercado imobiliário bra
 ---
 
 **Status**: ✅ Pronto para Produção  
-**Última Atualização**: 27 de Outubro de 2025  
+**Última Atualização**: 1 de Novembro de 2025  
 **Powered by XRPL** ⚡
 
