@@ -1,3 +1,4 @@
+````markdown
 # 📖 Documentação Completa - TokenCasa
 
 > **Tokenização de Imóveis para Micro-Investidores**  
@@ -49,17 +50,178 @@ Democratizar o acesso ao patrimônio imobiliário, permitindo que micro-investid
 - 💰 **Investimento mínimo**: R$ 100 (vs. R$ 200k de um imóvel físico)
 - 🚀 **Liquidez 24/7**: Trading instantâneo no DEX XRPL
 - 💸 **Distribuição automática**: Aluguéis distribuídos proporcionalmente
-````markdown
-# This file has been archived and replaced by `DOCUMENTACAO_COMPLETA_ARCHIVE.md`.
-
-Please refer to `/DOCUMENTACAO_COMPLETA_ARCHIVE.md` for the full combined Portuguese + English documentation.
+- 🏠 **Diversificação**: Múltiplos imóveis com baixo capital
+- ⚡ **Eficiência**: Custos 100x menores que Ethereum/Solana
+- 🛡️ **Compliance nativo**: KYC/AML integrado via MPT
 
 ---
 
-Este arquivo foi arquivado e substituído por `DOCUMENTACAO_COMPLETA_ARCHIVE.md`.
+## 😟 O Problema
 
-Consulte `/DOCUMENTACAO_COMPLETA_ARCHIVE.md` para a documentação completa combinada em Português e Inglês.
+### Contexto do Mercado Brasileiro
 
+#### 1. Barreiras de Entrada no Mercado Imobiliário
+
+- **Investimento mínimo**: R$ 200.000 - 500.000 para adquirir um imóvel
+- **Alto custo de entrada**: Inacessível para 80% da população brasileira
+- **Iliquidez**: Venda de imóvel leva meses, alto risco
+- **Custos de transação**: 6-8% (ITBI, cartório, corretagem)
+- **Concentração de risco**: Todo capital em 1 único imóvel
+- **Impossibilidade de fracionamento**: Não pode dividir propriedade
+
+#### 2. Limitações dos Fundos Imobiliários (FIIs)
+
+- **Investimento mínimo**: R$ 10.000+ para diversificação adequada
+- **Taxas de administração**: 1-2% ao ano
+- **Liquidez limitada**: Horário comercial da B3
+- **Transparência baixa**: Relatórios trimestrais
+- **Falta de escolha**: Investimento em cesta de imóveis
+
+#### 3. Atraso da Poupança
+
+- **Rendimento real**: 7,3% a.a. - inflação 4,4% = **2,9% real**
+- **Taxa de poupança**: Apenas 14,5% do PIB (uma das mais baixas da América Latina)
+- **Low yield**: Desperdício de oportunidade de investimento
+
+#### 4. Realidade dos Investidores Brasileiros
+
+- **37% da população** (59M) investe em algum produto financeiro
+- **18 milhões** considerando investir pela primeira vez em 2025
+- **51%** dos não-investidores não se sentem seguros para começar
+- **Classe C, D**: Sem acesso ao mercado imobiliário tradicional
+
+### Oportunidade
+
+- 🌍 **Mercado imobiliário brasileiro**: R$ 10+ trilhões em valor
+- 📈 **Mercado tokenização**: US$ 1 bilhão em 2024 (crescimento 300%)
+- 🚀 **Projeção global RWA**: US$ 150 trilhões até 2030
+- 💰 **Yields imobiliários**: 6-9% a.a. (aluguel) + apreciação 3-5% a.a.
+- 📊 **Total expected yield**: 9-14% ao ano
+
+---
+
+## 💡 A Solução
+
+### O TokenCasa Resolve
+
+#### 1. Democratização do Investimento Imobiliário
+
+- ✅ **Investimento mínimo**: R$ 100 (99% mais acessível que imóvel)
+- ✅ **Fracionamento extremo**: Divida qualquer imóvel em tokens
+- ✅ **Acesso universal**: Classes B, C e D podem investir
+- ✅ **Diversificação real**: R$ 1.000 → 10 imóveis diferentes
+
+#### 2. Liquidez Instantânea
+
+- ✅ **Trading 24/7**: Compre e venda tokens a qualquer hora
+- ✅ **AMM nativo XRPL**: Liquidez garantida
+- ✅ **Tempo de execução**: 3-5 segundos (vs. meses venda imóvel)
+- ✅ **CAM (Continuous Auction Mechanism)**: Capture arbitragem
+
+#### 3. Distribuição Automática de Aluguéis
+
+- ✅ **Escrow nativo**: Distribuição proporcional automática
+- ✅ **Time-locked**: Release no dia X de cada mês
+- ✅ **Zero intermediários**: Smart escrow elimina custos
+- ✅ **Transparência**: On-chain, auditável
+
+#### 4. Compliance Integrado
+
+- ✅ **MPT com KYC/AML built-in**: Transfer restrictions automáticas
+- ✅ **Credentials XRPL**: Verificação de investidores qualificados
+- ✅ **Reporting CVM**: Automático e transparente
+- ✅ **Redução de custos**: 80% mais barato compliance
+
+### Valor Proposto
+
+**Para Investidores:**
+- 🎯 Acesso ao mercado imobiliário por R$ 100
+- 💰 Yield 9-10% a.a. (vs. 7,3% poupança)
+- 🚀 Liquidez 24/7
+- 📊 Diversificação fácil
+- 🏠 Escolha de imóveis específicos
+
+**Para Proprietários:**
+- 💵 Liquididade instantânea
+- 📈 Valorização do imóvel via tokenização
+- 🔄 Aluguel simplificado (distribuição automática)
+- 🌐 Acesso a investidores globais
+
+---
+
+## 🔄 Como Funciona
+
+### Fluxo Principal: Ana Investe R$ 500
+
+#### Passo 1: Marketplace
+
+Ana acessa a plataforma e vê o **Apartamento Copacabana**:
+- Valor total: R$ 800.000
+- Yield: 8% ao ano
+- Tokens disponíveis: 1.000.000
+- Preço por token: R$ 0,80
+
+#### Passo 2: Compra de Tokens
+
+Ana decide investir **R$ 500**:
+- Clica em "Investir R$ 500"
+- Compra **625 tokens** (R$ 500 ÷ R$ 0,80)
+- Representa **0,0625%** da propriedade
+- Transaction executada via DEX XRPL
+
+#### Passo 3: Portfolio
+
+Após compra, Ana possui:
+- **625 tokens** do Apartamento Copacabana
+- Valor investido: R$ 500
+- Yield esperado: 8% a.a.
+
+#### Passo 4: Distribuição de Aluguel (Mês 1)
+
+- Aluguel mensal: R$ 6.000
+- Calculado por token: R$ 6.000 ÷ 1.000.000 = **R$ 0,006 por token**
+- Ana recebe: 625 tokens × R$ 0,006 = **R$ 3,75**
+- Distribuição via Escrow nativo XRPL
+
+#### Passo 5: Mês 12
+
+- Ana acumulou: R$ 3,75 × 12 = **R$ 45 em aluguéis**
+- Return: **9% sobre R$ 500 investido**
+
+#### Passo 6: Venda de Tokens
+
+- Ana decide vender seus tokens:
+- Preço atualizado: R$ 0,85 por token (valorização 6,25%)
+- Vende 625 tokens no DEX
+- Recebe: R$ 531,25
+- **Total**: R$ 576,25 (R$ 45 aluguéis + R$ 531,25 capital)
+
+**Retorno Final**: 15,25% em 1 ano (vs. 7,3% poupança)
+
+### Arquitetura de Funcionamento
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    TOKENCASA PLATFORM                    │
+└─────────────────────────────────────────────────────────┘
+                            │
+                            │
+        ┌───────────────────┼───────────────────┐
+        │                   │                   │
+        ▼                   ▼                   ▼
+  ┌──────────┐        ┌──────────┐       ┌──────────┐
+  │Frontend  │        │ Backend  │       │  XRPL    │
+  │Next.js   │◄──────►│ NestJS   │◄─────►│Testnet   │
+  │React     │        │PostgreSQL│       │Contracts  │
+  └──────────┘        └──────────┘       └──────────┘
+        │                   │                   │
+        │                   │                   │
+        ▼                   ▼                   ▼
+  ┌──────────┐        ┌──────────┐       ┌──────────┐
+  │IPFS      │        │ SendGrid │       │ DEX Native│
+  │Pinata    │        │ Email    │       │ AMM/CAM   │
+  └──────────┘        └──────────┘       └──────────┘
+```
 
 ---
 
@@ -716,21 +878,22 @@ TokenCasa is a full-stack platform for tokenizing real estate, allowing anyone t
 **Deploy Date**: November 1, 2025, 04:38 UTC  
 **Network**: XRPL Testnet  
 **Endpoint**: `wss://s.altnet.rippletest.net:51233`  
+**Wallet**: `ratmrQEFnEiZqZ1RVvR7Yg28HjAqR5sf1E`  
+**Balance**: 100.00 XRP
 
-Deploy wallet:
-- **Address**: `ratmrQEFnEiZqZ1RVvR7Yg28HjAqR5sf1E`
-- **Balance**: 100.00 XRP
-
-Deployed contracts (4/4 - 100%):
+### Contratos Deployados
 
 1. CredentialsContract — connected (2025-11-01T04:38:43.835Z)
 2. MPTContract — connected (2025-11-01T04:38:44.923Z) — owner: `ratmrQEFnEiZqZ1RVvR7Yg28HjAqR5sf1E`
 3. EscrowContract — connected (2025-11-01T04:38:46.008Z)
 4. DEXContract — connected (2025-11-01T04:38:47.094Z)
 
-Reports:
-- JSON: `contracts/deploy-reports/deploy-testnet-2025-11-01T04-38-47-396Z.json`
-- Log: `contracts/deploy-reports/deploy-testnet-2025-11-01T04-38-47-396Z.log`
+### Relatórios
+
+ - **JSON**: `contracts/deploy-reports/deploy-testnet-2025-11-01T04-38-47-396Z.json`
+ - **Log**: `contracts/deploy-reports/deploy-testnet-2025-11-01T04-38-47-396Z.log`
+
+---
 
 ## Quick start (English)
 
@@ -755,3 +918,4 @@ This starts:
 
 If you want, I can also create a separate `DOCUMENTATION_COMPLETE_EN.md` file with a full, line-by-line translation of the Portuguese document. Tell me which option you prefer.
 
+````

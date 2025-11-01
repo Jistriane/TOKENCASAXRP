@@ -39,3 +39,4 @@ logs/
 *.secret
 *.key
 contracts/.env
+.vercel

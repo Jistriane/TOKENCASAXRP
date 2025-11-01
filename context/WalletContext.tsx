@@ -263,8 +263,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
         onRetry={async () => {
           try {
             setWaitingForAuth(true);
-            await walletConnector.requestSignIn();
-            // após tentativa, re-executa connect() para finalizar fluxo
+            // Re-executa connect() para tentar novamente
             await connect();
           } catch (e) {
             console.error('Falha ao forçar sign-in:', e);
