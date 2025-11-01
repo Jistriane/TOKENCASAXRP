@@ -1,5 +1,7 @@
 # 🏠 TokenCasa - Fracionamento de Imóveis para Micro-Investidores
 
+🇬🇧 English: [README_EN.md](./README_EN.md)
+
 <div align="center">
   <img src="Logo.png" alt="TokenCasa Logo" width="200"/>
   
