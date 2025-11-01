@@ -13,6 +13,11 @@
 **Data**: 1 de Novembro de 2025  
 **Powered by XRPL**
 
+### Documentação em Inglês
+
+- Resumo em inglês disponível em `DOCUMENTACAO_COMPLETA.md` → seção **English version**.
+- Link direto (no repositório): `./DOCUMENTACAO_COMPLETA.md#english-version`
+
 ### 🚀 Deploy dos Contratos XRPL
 
 **Status**: ✅ Contratos Deployados na Testnet XRPL  
@@ -327,9 +332,9 @@ TokenCasaXRP/
 - **Logging**: Winston + Sentry
 - **Monitoramento**: Prometheus + Grafana
 
-### Blockchain
+-### Blockchain
 - **Network**: XRPL Testnet (Deploy Completo)
-- **Wallet Deploy**: `rpyDCbETL2pYhhz5aJoWVo6ovk1GyFgFpb`
+- **Wallet Deploy**: `ratmrQEFnEiZqZ1RVvR7Yg28HjAqR5sf1E`
 - **Balance**: 100.00 XRP
 - **Endpoint**: `wss://s.altnet.rippletest.net:51233`
 - **Features**: 
