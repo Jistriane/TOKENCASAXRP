@@ -223,18 +223,24 @@ export class EscrowContract {
         transaction: escrowId,
       });
 
-      if (!tx.result || tx.result.TransactionType !== 'EscrowCreate') {
+      if (!tx.result) {
         return null;
       }
 
-      const escrowCreate = tx.result;
-      const metadata = JSON.parse(Buffer.from(escrowCreate.Condition, 'hex').toString());
+      // Cast para acessar propriedades específicas do EscrowCreate
+      const escrowCreate = tx.result.tx_json as any;
+      
+      if (escrowCreate.TransactionType !== 'EscrowCreate') {
+        return null;
+      }
+
+      const metadata = JSON.parse(Buffer.from(escrowCreate.Condition || '', 'hex').toString());
 
       return {
         id: escrowId,
         propertyId: metadata.propertyId,
-        totalRent: Number(escrowCreate.Amount),
-        rentPerToken: Number(escrowCreate.Amount) / metadata.totalTokens,
+        totalRent: Number(escrowCreate.Amount || 0),
+        rentPerToken: Number(escrowCreate.Amount || 0) / metadata.totalTokens,
         releaseDate: new Date(metadata.distributionDate),
         distributed: false,
         transactionHash: escrowId

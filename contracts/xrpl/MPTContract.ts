@@ -301,34 +301,47 @@ export class MPTContract {
     }
   }
 
+  /**
+   * Obtém informações completas de um MPT
+   */
   async getMPTInfo(mptId: string): Promise<MPTToken | null> {
     await this.connect();
 
     try {
       // Buscar informações do token no ledger
-      const tx = await this.client.request({
+      const result = await this.client.request({
         command: 'tx',
         transaction: mptId,
       });
 
-      if (!tx.result) {
+      if (!result.result) {
         return null;
       }
 
-      // Extrair metadados do URI
-      const uri = tx.result.URI || '';
-      const metadataHash = Buffer.from(uri, 'hex').toString('utf-8').replace('ipfs://', '');
+      // Processar metadados do token
+      const tx = result.result;
+      const txData = tx.tx_json as any; // Cast para acessar propriedades opcionais
+
+      const uri = txData.URI ? Buffer.from(txData.URI, 'hex').toString('utf-8') : '';
+      const metadataHash = uri.replace('ipfs://', '');
+
+      // Extrair dados do token dos memos da transação
+      const memos = txData.Memos || [];
+      const propertyId = memos[0]?.Memo?.MemoData || '';
+      const name = memos[1]?.Memo?.MemoData || '';
+      
+      const supply = txData.TotalSupply ? Number(txData.TotalSupply) : 0;
 
       const mpt: MPTToken = {
         id: mptId,
-        propertyId: tx.result.Memos?.[0]?.Memo?.MemoData || '',
-        name: tx.result.Memos?.[1]?.Memo?.MemoData || '',
-        supply: Number(tx.result.TotalSupply || 0),
-        metadataHash,
-        owner: tx.result.Account,
+        propertyId: propertyId,
+        name: name,
+        supply: supply,
+        metadataHash: metadataHash,
+        owner: txData.Account || '',
         restrictions: {
           requireCredential: 'BR-Investor-Verified',
-          maxSupply: Number(tx.result.TotalSupply || 0),
+          maxSupply: supply,
           transferable: true,
         },
       };
@@ -338,15 +351,6 @@ export class MPTContract {
       console.error('Erro ao buscar informações do MPT:', error);
       return null;
     }
-  }
-
-  /**
-   * Obtém informações completas de um MPT
-   */
-  async getMPTInfo(mptId: string): Promise<MPTToken | null> {
-    // Buscar informações do MPT no ledger
-    // Por enquanto retorna null
-    return null;
   }
 }
 
