@@ -215,9 +215,62 @@ export class EscrowContract {
    * Consulta informações de um Escrow
    */
   async getEscrowInfo(escrowId: string): Promise<EscrowInfo | null> {
-    // Implementar busca de informações do Escrow no ledger
-    // Por enquanto retorna null
-    return null;
+    await this.connect();
+    
+    try {
+      const tx = await this.client.request({
+        command: 'tx',
+        transaction: escrowId,
+      });
+
+      if (!tx.result || tx.result.TransactionType !== 'EscrowCreate') {
+        return null;
+      }
+
+      const escrowCreate = tx.result;
+      const metadata = JSON.parse(Buffer.from(escrowCreate.Condition, 'hex').toString());
+
+      return {
+        id: escrowId,
+        propertyId: metadata.propertyId,
+        totalRent: Number(escrowCreate.Amount),
+        rentPerToken: Number(escrowCreate.Amount) / metadata.totalTokens,
+        releaseDate: new Date(metadata.distributionDate),
+        distributed: false,
+        transactionHash: escrowId
+      };
+    } catch (error) {
+      console.error('Erro ao buscar informações do Escrow:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Valida holders antes da distribuição
+   */
+  private async validateHolders(
+    holders: Array<{ address: string; tokens: number }>,
+    totalTokens: number
+  ): Promise<boolean> {
+    // Validar se a soma dos tokens corresponde ao total
+    const sumTokens = holders.reduce((acc, h) => acc + h.tokens, 0);
+    if (sumTokens !== totalTokens) {
+      throw new Error(`Total de tokens inválido. Esperado: ${totalTokens}, Recebido: ${sumTokens}`);
+    }
+
+    // Validar cada holder
+    for (const holder of holders) {
+      const accountInfo = await this.client.request({
+        command: 'account_info',
+        account: holder.address,
+      }).catch(() => null);
+
+      if (!accountInfo) {
+        throw new Error(`Holder inválido: ${holder.address}`);
+      }
+    }
+
+    return true;
   }
 
   /**

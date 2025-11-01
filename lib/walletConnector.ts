@@ -33,34 +33,25 @@ class WalletConnector {
       return WalletType.UNKNOWN;
     }
 
-    // Verificar se modo mock está ativo
-    const mockMode = (window as any).walletMockMode;
-    if (mockMode) {
-      console.log('🎭 Modo MOCK detectado, usando carteira simulada');
-      return WalletType.UNKNOWN; // Será tratado como mock
-    }
+
 
     // Verificar Crossmark - múltiplas formas
     const win = window as any;
     
     // SDK Crossmark (múltiplas propriedades possíveis)
     if (win.crossmark) {
-      console.log('✅ Crossmark SDK detectado');
       this._crossmarkInstance = win.crossmark;
       this.detectedWallet = WalletType.CROSSMARK;
       
       // Adicionar listener para mudanças de sessão
       try {
         if (win.crossmark.on) {
-          win.crossmark.on('ready', () => {
-            console.log('🔔 Crossmark está pronto');
-          });
-          win.crossmark.on('event', (event: any) => {
-            console.log('🔔 Evento Crossmark:', event);
-          });
+          // adicionar listeners apenas quando disponíveis (silencioso)
+          win.crossmark.on('ready', () => {});
+          win.crossmark.on('event', (_event: any) => {});
         }
       } catch (e) {
-        console.log('Não foi possível adicionar listeners Crossmark:', e);
+        // não crítico
       }
       
       return WalletType.CROSSMARK;
@@ -68,7 +59,6 @@ class WalletConnector {
 
     // Crossmark via window.xrpl
     if (win.xrpl && (win.xrpl.isCrossmark || win.xrpl.crossmark)) {
-      console.log('✅ Crossmark nativo detectado');
       this._crossmarkInstance = win.xrpl.crossmark || win.xrpl;
       this.detectedWallet = WalletType.CROSSMARK;
       return WalletType.CROSSMARK;
@@ -95,8 +85,6 @@ class WalletConnector {
   async connect(): Promise<WalletInfo> {
     const walletType = await this.detectWallet();
 
-    console.log('🔍 Carteira detectada:', walletType);
-
     switch (walletType) {
       case WalletType.CROSSMARK:
         return await this.connectCrossmark();
@@ -105,13 +93,7 @@ class WalletConnector {
       case WalletType.GEMWALLET:
         return await this.connectGemWallet();
       default:
-        // Verificar se está em modo mock
-        if (typeof window !== 'undefined' && (window as any).walletMockMode) {
-          console.log('🎭 Usando carteira MOCK');
-          const mock = await import('./walletConnectorMock');
-          return await mock.walletConnectorMock.connect();
-        }
-        throw new Error('Nenhuma carteira XRPL detectada. Instale Crossmark, Xaman ou GemWallet.\n\n💡 Para usar modo MOCK, adicione ?mock=true na URL');
+        throw new Error('Nenhuma carteira XRPL detectada. Instale Crossmark, Xaman ou GemWallet.');
     }
   }
 
@@ -126,7 +108,7 @@ class WalletConnector {
       throw new Error('Crossmark não encontrado. Instale em: https://crossmark.io');
     }
     
-    console.log('✅ Usando instância detectada do Crossmark');
+  // usando instância detectada do Crossmark
     
     // Tentar obter endereço das várias propriedades possíveis
     let address = crossmark.session?.address || 
@@ -137,8 +119,7 @@ class WalletConnector {
                   crossmark.user?.address ||
                   crossmark.account;
     
-    console.log('🔍 Endereço da sessão atual:', address);
-    console.log('📦 Session complete:', crossmark.session);
+  // sessão atual (pode estar vazia)
     
     // Se já tiver endereço válido (começa com 'r'), retornar imediatamente
     if (address && typeof address === 'string' && address.startsWith('r')) {
@@ -152,8 +133,86 @@ class WalletConnector {
     }
     
     // Se não houver endereço, mostrar instruções e aguardar o usuário abrir manualmente
-    console.log('📝 Aguardando autorização do Crossmark...');
-    console.log('ℹ️ O usuário precisa abrir a extensão Crossmark manualmente e autorizar');
+  // aguardando autorização do usuário na extensão
+    
+    // Tentar invocar a API de conexão da extensão, se disponível, para abrir o prompt automaticamente
+    try {
+      if (crossmark.async && typeof crossmark.async.connect === 'function') {
+        console.log('📣 Chamando crossmark.async.connect() para abrir prompt de autorização...');
+        const res = await crossmark.async.connect();
+        console.log('📣 crossmark.async.connect() chamado com sucesso', res);
+      } else if (typeof crossmark.connect === 'function') {
+        console.log('📣 Chamando crossmark.connect() para abrir prompt de autorização...');
+        const res = await Promise.resolve(crossmark.connect());
+        console.log('📣 crossmark.connect() chamado com sucesso', res);
+      } else if (typeof crossmark.open === 'function') {
+        console.log('📣 Chamando crossmark.open() para abrir a extensão...');
+        try { crossmark.open(); } catch (e) { /* open pode não estar presente */ }
+      } else {
+        console.log('ℹ️ Nenhum método de conexão automático disponível na instância do Crossmark');
+      }
+
+      // Log detalhado da instância para diagnóstico
+      try {
+        console.log('🔎 Crossmark keys:', Object.keys(crossmark));
+      } catch (e) {
+        console.warn('⚠️ Não foi possível listar chaves de crossmark:', e);
+      }
+
+      try {
+        console.log('🔎 crossmark.async keys:', Object.keys(crossmark.async || {}));
+      } catch (e) {
+        console.warn('⚠️ Não foi possível listar chaves de crossmark.async:', e);
+      }
+
+      // Tentar obter sessão via métodos alternativos se disponíveis
+      try {
+        if (crossmark.async && typeof crossmark.async.getSession === 'function') {
+          const s = await crossmark.async.getSession();
+          console.log('📥 crossmark.async.getSession():', s);
+        } else if (typeof crossmark.getSession === 'function') {
+          const s = await Promise.resolve(crossmark.getSession());
+          console.log('📥 crossmark.getSession():', s);
+        } else if (typeof crossmark.requestSession === 'function') {
+          // requestSession pode abrir UI; só chamar se já tentamos connect
+          try {
+            const s = await Promise.resolve(crossmark.requestSession());
+            console.log('📥 crossmark.requestSession():', s);
+          } catch (e) {
+            console.warn('⚠️ crossmark.requestSession() falhou:', e);
+          }
+        } else {
+          console.log('ℹ️ Nenhum método getSession/requestSession detectado no Crossmark');
+        }
+        
+        // Se não obteve sessão ainda, tentar detect() e signInAndWait() (quando disponíveis)
+        try {
+          if (crossmark.async && typeof crossmark.async.detect === 'function') {
+            console.log('🔎 Chamando crossmark.async.detect() para forçar detecção...');
+            const det = await crossmark.async.detect();
+            console.log('🔎 Resultado detect():', det);
+          }
+
+          // Se ainda não conectado, tentar signInAndWait que normalmente abre prompt e aguarda
+          if (crossmark.async && typeof crossmark.async.signInAndWait === 'function') {
+            console.log('🔐 Chamando crossmark.async.signInAndWait() para solicitar login/assinatura...');
+            try {
+              const signin = await crossmark.async.signInAndWait();
+              console.log('🔐 signInAndWait() result:', signin);
+            } catch (e) {
+              console.warn('⚠️ signInAndWait() não completou:', e);
+            }
+          }
+        } catch (e) {
+          console.warn('⚠️ Erro ao chamar detect/signInAndWait:', e);
+        }
+      } catch (e) {
+        console.warn('⚠️ Erro ao tentar métodos alternativos de sessão do Crossmark:', e);
+      }
+    } catch (e) {
+      console.warn('⚠️ Erro ao tentar invocar método de conexão automático do Crossmark:', e);
+      // Continuar para o fluxo manual/polling sem interromper
+    }
     
     // Criar uma Promise que aguarda a sessão ser preenchida
     const connectPromise = new Promise<WalletInfo>((resolve, reject) => {
@@ -394,5 +453,6 @@ class WalletConnector {
   }
 }
 
-export default new WalletConnector();
+const walletConnector = new WalletConnector();
+export default walletConnector;
 

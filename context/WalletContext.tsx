@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Client } from 'xrpl';
 import walletConnector from '@/lib/walletConnector';
+import CrossmarkModal from '@/components/CrossmarkModal';
 
 interface WalletContextType {
   isConnected: boolean;
@@ -33,17 +34,6 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       const storedCredential = localStorage.getItem('credential_verified');
       if (storedCredential === 'true') {
         setHasCredential(true);
-      }
-      
-      // Verificar se deve usar modo mock
-      const mockParam = new URLSearchParams(window.location.search).get('mock');
-      const mockLocalStorage = localStorage.getItem('wallet_mock_mode');
-      
-      if (mockParam === 'true' || mockParam === '1' || mockLocalStorage === 'true') {
-        (window as any).walletMockMode = true;
-        localStorage.setItem('wallet_mock_mode', 'true');
-        console.log('🎭 Modo MOCK ativado! Usando carteira simulada.');
-        console.log('🎭 Para usar carteira real, remova ?mock=true da URL');
       }
       
       // Verificar se há wallet conectado salvo
@@ -113,28 +103,6 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     
     const autoDetectWallet = async () => {
       try {
-        // Verificar se está em modo mock
-        const isMock = (window as any).walletMockMode;
-        
-        if (isMock && !isConnected) {
-          // Conectar automaticamente com carteira mock
-          console.log('🎭 Modo MOCK: Conectando automaticamente...');
-          const mockAddress = 'rTEST1234567890123456789012345678901234567';
-          setAddress(mockAddress);
-          setIsConnected(true);
-          setHasCredential(true);
-          setBalance('1000.00');
-          
-          // Salvar dados da carteira mock
-          localStorage.setItem('wallet_address', mockAddress);
-          localStorage.setItem('credential_verified', 'true');
-          localStorage.setItem('wallet_mock_mode', 'true');
-          
-          console.log('✅ Carteira Mock conectada automaticamente!');
-          console.log('📍 Endereço:', mockAddress);
-          console.log('💰 Saldo: 1000.00 XRP');
-          return;
-        }
         
         // Verificar se Crossmark está disponível e já conectado
         const win = window as any;
@@ -241,6 +209,13 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       // Mostrar alerta apenas se o erro mencionar aguardar autorização
       if (errorMessage.includes('Aguardando') || errorMessage.includes('autorização')) {
         alert('⚠️ Aguardando autorização do Crossmark\n\nPor favor:\n1. Clique no ícone do Crossmark na barra de extensões\n2. Autorize esta conexão\n3. Aguarde até 1 minuto ou clique em "Conectar Carteira" novamente');
+      } else {
+        // Exibir erro genérico com instruções
+        let userMessage = `Erro ao conectar: ${errorMessage}`;
+        if (errorMessage.toLowerCase().includes('crossmark') || errorMessage.toLowerCase().includes('não encontrado')) {
+          userMessage += '\n\nParece que a extensão Crossmark não está instalada ou não está acessível. Instale-a em https://crossmark.io/ e tente novamente.';
+        }
+        alert(userMessage);
       }
     }
   };
@@ -281,6 +256,24 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
         client,
       }}
     >
+      <CrossmarkModal
+        open={waitingForAuth}
+        onClose={() => setWaitingForAuth(false)}
+        isLoading={isConnecting}
+        onRetry={async () => {
+          try {
+            setWaitingForAuth(true);
+            await walletConnector.requestSignIn();
+            // após tentativa, re-executa connect() para finalizar fluxo
+            await connect();
+          } catch (e) {
+            console.error('Falha ao forçar sign-in:', e);
+            alert('Não foi possível abrir o Crossmark automaticamente. Por favor, abra a extensão e autorize manualmente.');
+          } finally {
+            setWaitingForAuth(false);
+          }
+        }}
+      />
       {children}
     </WalletContext.Provider>
   );

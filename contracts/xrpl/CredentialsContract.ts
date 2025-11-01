@@ -19,7 +19,15 @@ export interface Credential {
   type: string;
   value: any;
   issuedAt: Date;
+  expiresAt?: Date;
   revoked: boolean;
+  metadata?: {
+    level: string;
+    description: string;
+    requirements: string[];
+    issuerName: string;
+    verificationMethod: string;
+  };
 }
 
 export class CredentialsContract {

@@ -4,7 +4,6 @@ import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Analytics from "./analytics";
 import MixpanelAnalytics from "./analytics-mixpanel";
-import MockWalletToggle from "@/components/MockWalletToggle";
 
 export const metadata: Metadata = {
   title: "TokenCasa - Invista em imóveis a partir de R$ 100",
@@ -31,7 +30,6 @@ export default function RootLayout({
         <ErrorBoundary>
           <WalletProvider>
             {children}
-            <MockWalletToggle />
           </WalletProvider>
         </ErrorBoundary>
       </body>

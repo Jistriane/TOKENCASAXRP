@@ -255,9 +255,89 @@ export class MPTContract {
    * Verifica se um endereço tem a credential necessária
    */
   private async verifyCredential(address: string, credential: string): Promise<boolean> {
-    // Implementar verificação de credentials via XRPL
-    // Por enquanto, retorna true para desenvolvimento
-    return true;
+    await this.connect();
+
+    try {
+      // Buscar NFTs (credentials) do endereço
+      const accountNFTs = await this.client.request({
+        command: 'account_nfts',
+        account: address,
+        limit: 400,
+      });
+
+      // Filtrar pela credential desejada
+      const credentials = accountNFTs.result.account_nfts
+        .map((nft: any) => {
+          try {
+            return JSON.parse(Buffer.from(nft.URI, 'hex').toString('utf-8'));
+          } catch {
+            return null;
+          }
+        })
+        .filter((cred: any) => cred && cred.type === credential);
+
+      if (credentials.length === 0) {
+        console.log(`❌ Endereço ${address} não possui a credential ${credential}`);
+        return false;
+      }
+
+      // Verificar se alguma credential está válida (não expirada e não revogada)
+      const validCredential = credentials.some(cred => {
+        const expirationDate = cred.expiresAt ? new Date(cred.expiresAt) : null;
+        const isExpired = expirationDate ? expirationDate < new Date() : false;
+        return !cred.revoked && !isExpired;
+      });
+
+      if (!validCredential) {
+        console.log(`❌ Todas as credentials ${credential} do endereço ${address} estão expiradas ou revogadas`);
+        return false;
+      }
+
+      console.log(`✅ Endereço ${address} possui credential ${credential} válida`);
+      return true;
+    } catch (error) {
+      console.error('Erro ao verificar credentials:', error);
+      return false;
+    }
+  }
+
+  async getMPTInfo(mptId: string): Promise<MPTToken | null> {
+    await this.connect();
+
+    try {
+      // Buscar informações do token no ledger
+      const tx = await this.client.request({
+        command: 'tx',
+        transaction: mptId,
+      });
+
+      if (!tx.result) {
+        return null;
+      }
+
+      // Extrair metadados do URI
+      const uri = tx.result.URI || '';
+      const metadataHash = Buffer.from(uri, 'hex').toString('utf-8').replace('ipfs://', '');
+
+      const mpt: MPTToken = {
+        id: mptId,
+        propertyId: tx.result.Memos?.[0]?.Memo?.MemoData || '',
+        name: tx.result.Memos?.[1]?.Memo?.MemoData || '',
+        supply: Number(tx.result.TotalSupply || 0),
+        metadataHash,
+        owner: tx.result.Account,
+        restrictions: {
+          requireCredential: 'BR-Investor-Verified',
+          maxSupply: Number(tx.result.TotalSupply || 0),
+          transferable: true,
+        },
+      };
+
+      return mpt;
+    } catch (error) {
+      console.error('Erro ao buscar informações do MPT:', error);
+      return null;
+    }
   }
 
   /**

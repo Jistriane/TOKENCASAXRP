@@ -10,14 +10,14 @@ export default function Hero() {
           <div className="flex justify-center mb-8">
             <Image src="/Logo.png" alt="TokenCasa Logo" width={120} height={120} className="rounded-2xl shadow-lg" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 mb-4 sm:mb-6 px-2">
             Invista em imóveis a partir de{' '}
             <span className="text-primary-600">R$ 100</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
             Da poupança para o patrimônio imobiliário em 5 minutos
           </p>
-          <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-500 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
             Tokenize imóveis residenciais e comerciais no XRPL. 
             Receba aluguel proporcional automaticamente via smart contracts.
           </p>
